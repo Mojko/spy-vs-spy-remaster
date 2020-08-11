@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/spritesheet.png" type="Texture" id=2]
@@ -6,12 +6,15 @@
 [ext_resource path="res://tools/state_machine/state_machine.gd" type="Script" id=4]
 [ext_resource path="res://tools/state_machine/sprite_animation_state.gd" type="Script" id=5]
 [ext_resource path="res://objects/player/interact.gd" type="Script" id=6]
-[ext_resource path="res://objects/player/inventory.gd" type="Script" id=7]
+[ext_resource path="res://objects/player/interact_door.gd" type="Script" id=7]
+[ext_resource path="res://objects/player/inventory.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.05327, 17.2986 )
 
 [sub_resource type="CapsuleShape2D" id=2]
+radius = 9.52654
+height = 0.0
 
 [node name="player" type="KinematicBody2D" groups=[
 "can_interact",
@@ -50,8 +53,15 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interact"]
 shape = SubResource( 2 )
 
-[node name="inventory" type="Node" parent="."]
+[node name="interact_door" type="Area2D" parent="."]
+editor/display_folded = true
 script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_door"]
+shape = SubResource( 2 )
+
+[node name="inventory" type="Node" parent="."]
+script = ExtResource( 8 )
 [connection signal="move" from="." to="interact" method="_on_player_move"]
 [connection signal="change_state" from="sprite/state_machine" to="sprite" method="_on_state_machine_change_state"]
 [connection signal="timeout" from="sprite/change_sprite_timer" to="sprite" method="_on_change_sprite_timer_timeout"]
@@ -59,5 +69,9 @@ script = ExtResource( 7 )
 [connection signal="area_exited" from="interact" to="interact" method="_on_interact_area_exited"]
 [connection signal="item_found_in_interactable" from="interact" to="inventory" method="_on_interact_item_found_in_interactable"]
 [connection signal="place_item_in_interactable" from="interact" to="inventory" method="_on_interact_place_item_in_interactable"]
+[connection signal="area_entered" from="interact_door" to="interact_door" method="_on_interact_door_area_entered"]
+[connection signal="area_exited" from="interact_door" to="interact_door" method="_on_interact_door_area_exited"]
+[connection signal="teleport" from="interact_door" to="." method="_on_interact_door_teleport"]
+[connection signal="teleport" from="interact_door" to="interact" method="_on_interact_door_teleport"]
 [connection signal="item_added_to_inventory" from="inventory" to="." method="_on_inventory_item_added_to_inventory"]
 [connection signal="item_removed_from_inventory" from="inventory" to="." method="_on_inventory_item_removed_from_inventory"]

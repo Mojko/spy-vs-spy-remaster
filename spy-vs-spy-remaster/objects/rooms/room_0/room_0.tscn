@@ -4,8 +4,8 @@
 [ext_resource path="res://sprites/rooms/room_yellow.png" type="Texture" id=2]
 [ext_resource path="res://objects/bookshelf/bookshelf.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/items/briefcase.tres" type="Resource" id=4]
-[ext_resource path="res://data/items/key.tres" type="Resource" id=5]
-[ext_resource path="res://objects/door/door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/door/door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/door/destination.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -20.328, -7.13723 )
@@ -69,16 +69,23 @@ shape = SubResource( 6 )
 position = Vector2( 40.1343, 30 )
 items_inside = [ ExtResource( 4 ) ]
 
-[node name="bookshelf2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 60 )
-scale = Vector2( -1, 1 )
-items_inside = [ ExtResource( 5 ) ]
-
-[node name="door" parent="." instance=ExtResource( 6 )]
+[node name="door_side_right" parent="." instance=ExtResource( 5 )]
 position = Vector2( 150, 50 )
 scale = Vector2( -1, 1 )
-_leads_to_room = 1
+id = 1
+leads_to_room = 1
+destination_door_id = 1
 _door_type = 1
+_door_state = 1
 
-[node name="door2" parent="." instance=ExtResource( 6 )]
+[node name="destination" parent="door_side_right" instance=ExtResource( 6 )]
+position = Vector2( 10, 1.035 )
+
+[node name="door_center" parent="." instance=ExtResource( 5 )]
 position = Vector2( 90, 30 )
+leads_to_room = 1
+_door_type = 2
+_door_state = 1
+
+[node name="destination" parent="door_center" instance=ExtResource( 6 )]
+position = Vector2( 0, 10 )

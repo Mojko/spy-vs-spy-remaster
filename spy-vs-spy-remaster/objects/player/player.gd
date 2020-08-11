@@ -4,7 +4,9 @@ signal power_changed(power);
 signal move(velocity);
 signal item_added_to_inventory(new_item_data);
 signal item_removed_from_inventory(removed_item_data);
+signal teleport(next_room_id, next_door_id);
 
+var is_busy : bool = false;
 var _current_power = 100 setget set_current_power, get_current_power;
 var _can_interact : bool = false;
 var _inventory : Array = [];
@@ -42,3 +44,6 @@ func _on_inventory_item_added_to_inventory(new_item_data):
 
 func _on_inventory_item_removed_from_inventory(removed_item_data):
 	emit_signal("item_removed_from_inventory", removed_item_data);
+
+func _on_interact_door_teleport(next_room_id, next_door_id):
+	emit_signal("teleport", next_room_id, next_door_id);

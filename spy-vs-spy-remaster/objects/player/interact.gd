@@ -8,6 +8,10 @@ var _is_interacting : bool;
 var _interactable_area : Area2D;
 
 func _process(delta):
+	if(get_owner().is_busy):
+		print("Player is busy");
+		return;
+		
 	if(!_can_interact):
 		return;
 	
@@ -18,6 +22,7 @@ func _process(delta):
 		
 		for item in items:
 			emit_signal("item_found_in_interactable", item);
+			print("Found item");
 		return;
 	
 	if(_is_interacting and Input.is_action_just_pressed("place_item")):
@@ -50,4 +55,7 @@ func _on_interact_area_exited(area):
 		_interactable_area = null;
 
 func _on_player_move(velocity):
+	_exit_interaction();
+	
+func _on_interact_door_teleport(next_room_id, next_door_id):
 	_exit_interaction();

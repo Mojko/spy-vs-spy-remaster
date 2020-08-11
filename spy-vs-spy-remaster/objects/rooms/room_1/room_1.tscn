@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/rooms/room.gd" type="Script" id=1]
 [ext_resource path="res://sprites/rooms/room_yellow.png" type="Texture" id=2]
 [ext_resource path="res://objects/bookshelf/bookshelf.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/items/briefcase.tres" type="Resource" id=4]
 [ext_resource path="res://objects/door/door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/door/destination.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -20.328, -7.13723 )
@@ -32,7 +33,6 @@ b = Vector2( -50.8347, -34.2792 )
 
 [node name="room_1" type="Node2D"]
 script = ExtResource( 1 )
-room_index = 1
 
 [node name="sprite" type="Sprite" parent="."]
 modulate = Color( 0.278431, 0.662745, 0.811765, 1 )
@@ -71,10 +71,23 @@ position = Vector2( 40.1343, 30 )
 items_inside = [ ExtResource( 4 ) ]
 
 [node name="door" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
 position = Vector2( 150, 50 )
 scale = Vector2( -1, 1 )
+id = 1
+destination_door_id = 1
 _door_type = 1
+_door_state = 1
+
+[node name="destination" parent="door" instance=ExtResource( 6 )]
+position = Vector2( 10, 0 )
 
 [node name="door2" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
 position = Vector2( 90, 110 )
-_door_state = 0
+_door_type = 2
+
+[node name="destination" parent="door2" instance=ExtResource( 6 )]
+position = Vector2( 0, -30 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )

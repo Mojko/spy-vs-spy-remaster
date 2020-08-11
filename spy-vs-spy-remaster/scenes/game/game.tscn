@@ -1,20 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/rooms/room_0/room_0.tscn" type="PackedScene" id=2]
-[ext_resource path="res://objects/player/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/level.gd" type="Script" id=3]
+[ext_resource path="res://objects/rooms/room_0/room_0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/rooms/room_1/room_1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/player/player.tscn" type="PackedScene" id=6]
 
 [node name="game" type="Node"]
+script = ExtResource( 1 )
+_player_path = NodePath("HD/player")
 
-[node name="UI" parent="." instance=ExtResource( 1 )]
+[node name="UI" parent="." instance=ExtResource( 2 )]
 
 [node name="HD" type="Node2D" parent="."]
 position = Vector2( 0.6, 22.945 )
 scale = Vector2( 1.864, 1.864 )
 
-[node name="room_yellow" parent="HD" instance=ExtResource( 2 )]
+[node name="level_0" type="Node2D" parent="HD"]
+script = ExtResource( 3 )
+_rooms = [ ExtResource( 4 ), ExtResource( 5 ) ]
 
-[node name="player" parent="HD" instance=ExtResource( 3 )]
+[node name="player" parent="HD" instance=ExtResource( 6 )]
 position = Vector2( 85.515, 57.4329 )
 [connection signal="item_added_to_inventory" from="HD/player" to="UI" method="_on_player_item_added_to_inventory"]
 [connection signal="item_removed_from_inventory" from="HD/player" to="UI" method="_on_player_item_removed_from_inventory"]
+[connection signal="teleport" from="HD/player" to="." method="_on_player_teleport"]

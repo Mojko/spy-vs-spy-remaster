@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/door/door.gd" type="Script" id=1]
 [ext_resource path="res://sprites/door_side_close.png" type="Texture" id=2]
@@ -8,10 +8,13 @@
 [ext_resource path="res://sprites/door_center_down_open.png" type="Texture" id=6]
 [ext_resource path="res://objects/door/sprite.gd" type="Script" id=7]
 
-[node name="door" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.60567, 15.0479 )
+
+[node name="door" type="Area2D" groups=[
+"door",
+]]
 script = ExtResource( 1 )
-_door_type = 2
-_door_state = 1
 _side_door_closed = ExtResource( 2 )
 _side_door_open = ExtResource( 3 )
 _center_door_closed = ExtResource( 4 )
@@ -20,4 +23,8 @@ _center_door_down_open = ExtResource( 6 )
 
 [node name="sprite" type="Sprite" parent="."]
 script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -14.1936 )
+shape = SubResource( 1 )
 [connection signal="sprite_changed" from="." to="sprite" method="_on_door_sprite_changed"]
