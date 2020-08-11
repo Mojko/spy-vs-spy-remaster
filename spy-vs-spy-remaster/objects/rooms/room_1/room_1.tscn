@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://objects/rooms/room.gd" type="Script" id=1]
+[ext_resource path="res://sprites/rooms/room_yellow.png" type="Texture" id=2]
+[ext_resource path="res://objects/bookshelf/bookshelf.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/items/briefcase.tres" type="Resource" id=4]
+[ext_resource path="res://objects/door/door.tscn" type="PackedScene" id=5]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( -20.328, -7.13723 )
+b = Vector2( 24.3104, 31.4447 )
+
+[sub_resource type="SegmentShape2D" id=2]
+a = Vector2( -50.6103, 3.40551 )
+b = Vector2( 28.348, 3.40551 )
+
+[sub_resource type="SegmentShape2D" id=3]
+a = Vector2( -50.6103, 3.40551 )
+b = Vector2( -6.42058, -30.9145 )
+
+[sub_resource type="SegmentShape2D" id=4]
+a = Vector2( -50.6103, 3.40551 )
+b = Vector2( 118.971, 2.95689 )
+
+[sub_resource type="SegmentShape2D" id=5]
+a = Vector2( -50.6103, 3.40551 )
+b = Vector2( -50.1617, -37.1952 )
+
+[sub_resource type="SegmentShape2D" id=6]
+a = Vector2( -50.6103, 3.40551 )
+b = Vector2( -50.8347, -34.2792 )
+
+[node name="room_1" type="Node2D"]
+script = ExtResource( 1 )
+room_index = 1
+
+[node name="sprite" type="Sprite" parent="."]
+modulate = Color( 0.278431, 0.662745, 0.811765, 1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="static_body_2d" type="StaticBody2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="static_body_2d"]
+position = Vector2( 150.259, 27.7064 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="static_body_2d"]
+position = Vector2( 100.697, 11.1857 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="static_body_2d"]
+position = Vector2( 56.4962, 51.035 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="static_body_2d"]
+position = Vector2( 55.5989, 90.7385 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="static_body_2d"]
+position = Vector2( 55.5989, 90.7385 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="static_body_2d"]
+position = Vector2( 224.731, 91.86 )
+shape = SubResource( 6 )
+
+[node name="bookshelf" parent="." instance=ExtResource( 3 )]
+position = Vector2( 40.1343, 30 )
+items_inside = [ ExtResource( 4 ) ]
+
+[node name="door" parent="." instance=ExtResource( 5 )]
+position = Vector2( 150, 50 )
+scale = Vector2( -1, 1 )
+_door_type = 1
+
+[node name="door2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 90, 110 )
+_door_state = 0

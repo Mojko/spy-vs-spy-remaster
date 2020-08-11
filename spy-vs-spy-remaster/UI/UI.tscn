@@ -1,0 +1,322 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://UI/UI.gd" type="Script" id=1]
+[ext_resource path="res://fonts/font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/PressStart2P-vaV7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://sprites/power.png" type="Texture" id=4]
+[ext_resource path="res://UI/power_progress/power_progress.gd" type="Script" id=5]
+[ext_resource path="res://UI/items/items_container.gd" type="Script" id=6]
+[ext_resource path="res://sprites/item.png" type="Texture" id=7]
+[ext_resource path="res://UI/items/item_display.gd" type="Script" id=8]
+[ext_resource path="res://sprites/items/briefcase_outline.png" type="Texture" id=9]
+[ext_resource path="res://sprites/items/briefcase.png" type="Texture" id=10]
+[ext_resource path="res://sprites/items/key_outline.png" type="Texture" id=11]
+[ext_resource path="res://sprites/items/key.png" type="Texture" id=12]
+[ext_resource path="res://sprites/items/moneybag_outline.png" type="Texture" id=13]
+[ext_resource path="res://sprites/items/moneybag.png" type="Texture" id=14]
+[ext_resource path="res://sprites/items/passport_outline.png" type="Texture" id=15]
+[ext_resource path="res://sprites/items/passport.png" type="Texture" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 8
+font_data = ExtResource( 3 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="side" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -100.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 100, 0 )
+
+[node name="time_text" type="Label" parent="side"]
+editor/display_folded = true
+margin_left = 6.25586
+margin_top = 40.0
+margin_right = 86.2559
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+text = "TIME"
+
+[node name="time_numb" type="Label" parent="side/time_text"]
+margin_left = 0.991943
+margin_top = 15.0247
+margin_right = 80.9919
+margin_bottom = 31.0247
+custom_fonts/font = SubResource( 1 )
+text = "04:31"
+
+[node name="power_text" type="Label" parent="side"]
+editor/display_folded = true
+margin_left = 8.25586
+margin_top = 80.0
+margin_right = 88.2559
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 2 )
+text = "POWER"
+
+[node name="power_background" type="ColorRect" parent="side/power_text"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 9.7838
+margin_right = -34.0
+margin_bottom = 9.7838
+rect_scale = Vector2( 1.87, 1.4 )
+color = Color( 0.384314, 0.172549, 0.890196, 1 )
+
+[node name="power_progress" type="TextureProgress" parent="side/power_text"]
+margin_left = -2.0
+margin_top = 9.7838
+margin_right = 46.0
+margin_bottom = 17.7838
+rect_scale = Vector2( 1.87, 1.4 )
+value = 100.0
+texture_progress = ExtResource( 4 )
+tint_progress = Color( 0.847059, 0.25098, 0.376471, 1 )
+script = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="side"]
+margin_left = 6.25586
+margin_top = 110.0
+margin_right = 82.2559
+margin_bottom = 178.0
+custom_constants/separation = 16
+
+[node name="items_container" type="VBoxContainer" parent="side/VBoxContainer"]
+editor/display_folded = true
+margin_right = 76.0
+margin_bottom = 26.0
+custom_constants/separation = 2
+script = ExtResource( 6 )
+
+[node name="items_text" type="Label" parent="side/VBoxContainer/items_container"]
+margin_right = 76.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 3 )
+text = "ITEMS"
+
+[node name="items" type="GridContainer" parent="side/VBoxContainer/items_container"]
+editor/display_folded = true
+margin_top = 10.0
+margin_right = 76.0
+margin_bottom = 26.0
+columns = 4
+
+[node name="briefcase" type="TextureRect" parent="side/VBoxContainer/items_container/items"]
+editor/display_folded = true
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="side/VBoxContainer/items_container/items/briefcase"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/items_container/items/briefcase/CenterContainer"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 13.0
+texture = ExtResource( 9 )
+
+[node name="filled" type="TextureRect" parent="side/VBoxContainer/items_container/items/briefcase/CenterContainer"]
+visible = false
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 13.0
+texture = ExtResource( 10 )
+
+[node name="key" type="TextureRect" parent="side/VBoxContainer/items_container/items"]
+editor/display_folded = true
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="side/VBoxContainer/items_container/items/key"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/items_container/items/key/CenterContainer"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 14.0
+margin_bottom = 11.0
+texture = ExtResource( 11 )
+
+[node name="filled" type="TextureRect" parent="side/VBoxContainer/items_container/items/key/CenterContainer"]
+visible = false
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 14.0
+margin_bottom = 11.0
+texture = ExtResource( 12 )
+
+[node name="moneybag" type="TextureRect" parent="side/VBoxContainer/items_container/items"]
+editor/display_folded = true
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="CenterContainer2" type="CenterContainer" parent="side/VBoxContainer/items_container/items/moneybag"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/items_container/items/moneybag/CenterContainer2"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 11.0
+margin_bottom = 13.0
+texture = ExtResource( 13 )
+
+[node name="filled" type="TextureRect" parent="side/VBoxContainer/items_container/items/moneybag/CenterContainer2"]
+visible = false
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 12.0
+margin_bottom = 14.0
+texture = ExtResource( 14 )
+
+[node name="passport" type="TextureRect" parent="side/VBoxContainer/items_container/items"]
+editor/display_folded = true
+margin_left = 60.0
+margin_right = 76.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="CenterContainer3" type="CenterContainer" parent="side/VBoxContainer/items_container/items/passport"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/items_container/items/passport/CenterContainer3"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 12.0
+margin_bottom = 12.0
+texture = ExtResource( 15 )
+
+[node name="filled" type="TextureRect" parent="side/VBoxContainer/items_container/items/passport/CenterContainer3"]
+visible = false
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 12.0
+margin_bottom = 12.0
+texture = ExtResource( 16 )
+
+[node name="traps_container" type="VBoxContainer" parent="side/VBoxContainer"]
+editor/display_folded = true
+margin_top = 42.0
+margin_right = 76.0
+margin_bottom = 68.0
+custom_constants/separation = 2
+
+[node name="traps_text" type="Label" parent="side/VBoxContainer/traps_container"]
+margin_right = 76.0
+margin_bottom = 8.0
+custom_fonts/font = SubResource( 3 )
+text = "TRAPS"
+
+[node name="traps" type="GridContainer" parent="side/VBoxContainer/traps_container"]
+editor/display_folded = true
+margin_top = 10.0
+margin_right = 76.0
+margin_bottom = 26.0
+columns = 4
+
+[node name="bomb" type="TextureRect" parent="side/VBoxContainer/traps_container/traps"]
+editor/display_folded = true
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+
+[node name="CenterContainer" type="CenterContainer" parent="side/VBoxContainer/traps_container/traps/bomb"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/traps_container/traps/bomb/CenterContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 13.0
+texture = ExtResource( 9 )
+
+[node name="bungee" type="TextureRect" parent="side/VBoxContainer/traps_container/traps"]
+editor/display_folded = true
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+
+[node name="CenterContainer" type="CenterContainer" parent="side/VBoxContainer/traps_container/traps/bungee"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/traps_container/traps/bungee/CenterContainer"]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 14.0
+margin_bottom = 11.0
+texture = ExtResource( 11 )
+
+[node name="bucket" type="TextureRect" parent="side/VBoxContainer/traps_container/traps"]
+editor/display_folded = true
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+
+[node name="CenterContainer2" type="CenterContainer" parent="side/VBoxContainer/traps_container/traps/bucket"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/traps_container/traps/bucket/CenterContainer2"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 11.0
+margin_bottom = 13.0
+texture = ExtResource( 13 )
+
+[node name="bomb_room" type="TextureRect" parent="side/VBoxContainer/traps_container/traps"]
+editor/display_folded = true
+margin_left = 60.0
+margin_right = 76.0
+margin_bottom = 16.0
+texture = ExtResource( 7 )
+
+[node name="CenterContainer3" type="CenterContainer" parent="side/VBoxContainer/traps_container/traps/bomb_room"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="outline" type="TextureRect" parent="side/VBoxContainer/traps_container/traps/bomb_room/CenterContainer3"]
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 12.0
+margin_bottom = 12.0
+texture = ExtResource( 15 )
