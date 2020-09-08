@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://network-demo/rpc/rpc_to_client.gd" type="Script" id=1]
+
+
+[node name="rpc_to_client" type="Node"]
+script = ExtResource( 1 )

@@ -9,33 +9,51 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Client",
+"language": "GDScript",
+"path": "res://network-demo/client/client.gd"
+}, {
 "base": "Resource",
 "class": "ItemData",
 "language": "GDScript",
-"path": "res://data/items/item_data.gd"
+"path": "res://_old/data/items/item_data.gd"
+}, {
+"base": "Node2D",
+"class": "NetworkedObject",
+"language": "GDScript",
+"path": "res://network-demo/client/networked_object.gd"
+}, {
+"base": "Node",
+"class": "Rpc",
+"language": "GDScript",
+"path": "res://network-demo/rpc/rpc.gd"
 }, {
 "base": "Node",
 "class": "SpriteAnimation",
 "language": "GDScript",
-"path": "res://tools/sprite_animation/sprite_animation.gd"
+"path": "res://_old/tools/sprite_animation/sprite_animation.gd"
 }, {
 "base": "State",
 "class": "SpriteAnimationState",
 "language": "GDScript",
-"path": "res://tools/state_machine/sprite_animation_state.gd"
+"path": "res://_old/tools/state_machine/sprite_animation_state.gd"
 }, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://tools/state_machine/state.gd"
+"path": "res://spy-vs-spy-remaster/scripts/state_machine/state.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://tools/state_machine/state_machine.gd"
+"path": "res://spy-vs-spy-remaster/scripts/state_machine/state_machine.gd"
 } ]
 _global_script_class_icons={
+"Client": "",
 "ItemData": "",
+"NetworkedObject": "",
+"Rpc": "",
 "SpriteAnimation": "",
 "SpriteAnimationState": "",
 "State": "",
@@ -45,12 +63,16 @@ _global_script_class_icons={
 [application]
 
 config/name="spy-vs-spy-remaster"
-run/main_scene="res://scenes/game/game.tscn"
-config/icon="res://godot/icon.png"
+run/main_scene="res://spy-vs-spy-remaster/world/world.tscn"
+config/icon="res://_old/godot/icon.png"
 
 [autoload]
 
-Item="*res://singletons/Item.gd"
+RpcToClient="*res://network-demo/rpc/rpc_to_client.gd"
+RpcToServer="*res://network-demo/rpc/rpc_to_server.gd"
+PrintHelper="*res://network-demo/common/print_helper.gd"
+NetworkGlobals="*res://network-demo/common/network_globals.gd"
+Item="*res://_old/singletons/Item.gd"
 
 [display]
 
@@ -97,4 +119,4 @@ quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-environment/default_environment="res://godot/default_env.tres"
+environment/default_environment="res://_old/godot/default_env.tres"
