@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="spy-vs-spy-remaster"
-run/main_scene="res://spy-vs-spy-remaster/world/world.tscn"
+run/main_scene="res://network-demo/common/main.tscn"
 config/icon="res://_old/godot/icon.png"
 
 [autoload]
@@ -73,11 +73,12 @@ RpcToServer="*res://network-demo/rpc/rpc_to_server.gd"
 PrintHelper="*res://network-demo/common/print_helper.gd"
 NetworkGlobals="*res://network-demo/common/network_globals.gd"
 Item="*res://_old/singletons/Item.gd"
+Enum="*res://spy-vs-spy-remaster/scripts/singletons/enum.gd"
 
 [display]
 
-window/size/width=426
-window/size/height=240
+window/size/width=256
+window/size/height=144
 window/stretch/mode="2d"
 
 [input]

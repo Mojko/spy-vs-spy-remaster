@@ -50,6 +50,9 @@ func _ready():
 		host.queue_free();
 	
 func _on_client_connect(id):
+	if(!in_lobby):
+		return;
+		
 	PrintHelper.print_server("Client with id(" + str(id) + ") connected to the server");
 	
 	connected_clients.append({

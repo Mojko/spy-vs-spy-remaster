@@ -17,7 +17,12 @@ func _physics_process(delta):
 func move(velocity):
 	var old_position = global_transform.origin;
 	move_and_slide(velocity);
-	emit_signal("move", velocity.normalized(), old_position, global_transform.origin);
+	emit_signal("move", get_parent().object_id, velocity.normalized(), old_position, global_transform.origin);
+	
+func _on_state_machine_change_state(state_node):
+	#Make the player stop on the server too!
+	if(state_node.name == "idle"):
+		emit_signal("move", get_parent().object_id, Vector2.ZERO, global_transform.origin, global_transform.origin);
 	
 func _on_server_set_object_position(object_id, position):
 	if(get_parent().object_id != object_id):
@@ -28,39 +33,3 @@ func _on_server_set_object_position(object_id, position):
 func _on_server_move_object(object_id, direction, old_position, position):
 	if(get_parent().object_id != object_id):
 		return;
-		
-	#Check for hacks
-	
-	
-	
-	
-	
-	
-	
-	
-	
-#func _physics_process(delta):
-#	state_machine.update(self);
-#
-#	var direction = Vector2();
-#
-#	if(Input.is_action_pressed("move_up")):
-#		direction.y -= 1;
-#	if(Input.is_action_pressed("move_right")):
-#		direction.x += 1;
-#	if(Input.is_action_pressed("move_down")):
-#		direction.y += 1;
-#	if(Input.is_action_pressed("move_left")):
-#		direction.x -= 1;
-#
-#	old_position = global_transform.origin;
-#
-#	move_and_slide(direction.normalized() * speed);
-#
-#	if(direction.length() > 0):
-#		is_moving = true;
-#		emit_signal("move", get_parent().object_id, direction.normalized(), old_position, global_transform.origin);
-#	else:
-#		if(is_moving):
-#			emit_signal("move", get_parent().object_id, direction.normalized(), old_position, global_transform.origin);
-#		is_moving = false;
